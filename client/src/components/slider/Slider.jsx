@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
-import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { mobile } from '../../responsive';
 
@@ -98,7 +97,7 @@ export const Slider = () => {
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
         { sliderItems.map( sliderItem => (
-          <Slide bg={sliderItem.bg} key={sliderItem.id}>
+          <Slide bg={sliderItem.bg} key={sliderItem._id}>
             <ImageContainer>
               {/* <Image src='https://i.ibb.co./XsdmR2c/1.png' /> */ }
               <Image src={sliderItem.img} alt="" />

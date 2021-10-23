@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { Home } from './pages/home/Home'
 
 export const App = () => {
   return (
-    <div>
-      <h1>Hello world</h1>
-    </div>
+    <>
+      <Router>
+      <Switch>
+        <Route exact component={Home} />
+      </Switch>
+      </Router>
+    </>
   )
 }

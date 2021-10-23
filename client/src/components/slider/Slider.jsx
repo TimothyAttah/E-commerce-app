@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
 import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { mobile } from '../../responsive';
@@ -93,12 +94,13 @@ export const Slider = () => {
   return (
     <Container>
       <Arrow dir="left" onClick={() => handleClick('left')}>
-        <Icon name="arrow left" />
+        <ArrowLeftOutlined />
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
         { sliderItems.map( sliderItem => (
           <Slide bg={sliderItem.bg} key={sliderItem.id}>
             <ImageContainer>
+              {/* <Image src='https://i.ibb.co./XsdmR2c/1.png' /> */ }
               <Image src={sliderItem.img} alt="" />
             </ImageContainer>
             <InfoContainer>
@@ -112,7 +114,7 @@ export const Slider = () => {
         ))}
       </Wrapper>
       <Arrow dir="right" onClick={() => handleClick('right')}>
-        <Icon name="arrow right" />
+        <ArrowRightOutlined />
       </Arrow>
     </Container>
   );

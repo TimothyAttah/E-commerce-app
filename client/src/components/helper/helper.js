@@ -30,19 +30,19 @@ export const sliderItems = [
 export const categories = [
   {
     _id: 1,
-    img: `${images.Img1}`,
+    img: `${images.Photo2}`,
     title: 'shirt style',
     category: 'women',
   },
   {
     _id: 2,
-    img: `${images.Img4}`,
+    img: `${images.Photo4}`,
     title: 'loungewear love',
     category: 'coats',
   },
   {
     _id: 3,
-    img: `${images.Img9}`,
+    img: `${images.Img17}`,
     title: 'light jackets',
     category: 'jeans',
   },

@@ -1,11 +1,13 @@
 import React from 'react';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import { Cart } from './pages/cart/Cart';
 import { Home } from './pages/home/Home';
+import { Login } from './pages/login/Login';
 import { Product } from './pages/products/Product';
 import { ProductList } from './pages/products/ProductList';
 
 export const App = () => {
+	 const user = false;
 	return (
 		<Router>
 			<Switch>
@@ -20,6 +22,9 @@ export const App = () => {
 				</Route>
 				<Route path='/cart' exact>
 					<Cart />
+				</Route>
+				<Route path='/login' exact>
+					{user ? <Redirect to='/' /> : <Login />}
 				</Route>
 			</Switch>
 		</Router>

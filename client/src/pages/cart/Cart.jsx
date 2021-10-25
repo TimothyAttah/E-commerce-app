@@ -1,7 +1,6 @@
 import React from 'react';
 import { Add, Remove } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
-// eslint-disable-next-line import/no-extraneous-dependencies
 // import StripeCheckout from 'react-stripe-checkout';
 import { Announcement } from '../../components/Announcement';
 import { Footer } from '../../components/footer/Footer';
@@ -90,7 +89,7 @@ export const Cart = () => {
 						<Hr />
 						<Product>
 							<ProductDetail>
-								<Image src={images.Img5} alt='' />
+								<Image src={images.Img15} alt='' />
 								<Details>
 									<ProductName>
 										<b>Product:</b> Hakura t-shirt

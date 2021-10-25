@@ -5,6 +5,7 @@ import { Home } from './pages/home/Home';
 import { Login } from './pages/login/Login';
 import { Product } from './pages/products/Product';
 import { ProductList } from './pages/products/ProductList';
+import { Register } from './pages/register/Register';
 
 export const App = () => {
 	 const user = false;
@@ -25,6 +26,9 @@ export const App = () => {
 				</Route>
 				<Route path='/login' exact>
 					{user ? <Redirect to='/' /> : <Login />}
+				</Route>
+				<Route path='/register' exact>
+					{user ? <Redirect to='/' /> : <Register />}
 				</Route>
 			</Switch>
 		</Router>

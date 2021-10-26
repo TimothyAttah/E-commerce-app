@@ -11,6 +11,7 @@ const orderControllers = {
 			return res.status(500).json({ error: err });
 		}
 	},
+
 	// // UPDATE
 	updateOrder: async (req, res) => {
 		try {
@@ -28,6 +29,7 @@ const orderControllers = {
 			return res.status(500).json({ error: err });
 		}
 	},
+
 	// // DELETE
 	deleteOrder: async (req, res) => {
 		try {
@@ -37,7 +39,8 @@ const orderControllers = {
 			return res.status(500).json({ error: err });
 		}
 	},
-	// // GET CART
+
+	// // GET USERS ORDERS 
 	getUserOrders: async (req, res) => {
 		try {
 			const orders = await Order.find({ userId: req.params.userId });
@@ -46,7 +49,8 @@ const orderControllers = {
 			return res.status(500).json({ error: err });
 		}
 	},
-	// // GET ALL CART
+
+	// // GET ALL ORDERS
 	getAllOrders: async (req, res) => {
 		try {
 			const orders = await Order.find();
@@ -55,6 +59,7 @@ const orderControllers = {
 			return res.status(500).json({ error: err });
 		}
 	},
+
 	// // GET MONTHLY INCOME
 	getMonthlyIncome: async (req, res) => {
 		const date = new Date();

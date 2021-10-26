@@ -1,6 +1,6 @@
 const router = require( 'express' ).Router();
 const userControllers = require( '../controllers/usersControllers' );
-const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require( '../middlewares/auth' );
+const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require( '../middlewares/auth' );
 
 router.put( '/update/:id', verifyTokenAndAuthorization, userControllers.updateUser );
 

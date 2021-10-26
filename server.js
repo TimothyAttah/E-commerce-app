@@ -10,6 +10,10 @@ const connectDB = require('./config/db');
 
 connectDB();
 
+app.get( '/', ( req, res ) => {
+	res.send('hello world')
+})
+
 app.use('/api/auth', require('./routes/authRoute'));
 app.use('/api/users', require('./routes/usersRoute'));
 app.use('/api/products', require('./routes/productRoute'));

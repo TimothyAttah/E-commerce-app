@@ -1,7 +1,7 @@
 {
   "name": "project-1",
   "version": "1.0.0",
-  "description": "Facebook Clone App",
+  "description": "E-Commerce App",
   "main": "server.js",
   "engines": {
     "node": "15.10.0",
@@ -17,18 +17,19 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
     "cloudinary": "^1.26.3",
     "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
+    "file": "^0.2.2",
     "gridfs-stream": "^1.1.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
     "multer": "^1.4.2",
     "multer-gridfs-storage": "^4.2.0",
     "path": "^0.12.7",
-    "pusher": "^3.0.1"
+    "stripe": "^8.178.0"
   }
 }

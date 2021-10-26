@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Facebook Clone App",
   "main": "server.js",
-  "type":"module",
   "engines": {
     "node": "15.10.0",
     "npm": "7.6.0"

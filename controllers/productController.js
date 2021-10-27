@@ -8,7 +8,7 @@ const productControllers = {
       const savedProduct = await newProduct.save();
       res.status( 200 ).json( { message: 'New product added', savedProduct } );
     } catch (err) {
-      return res.status(500).json({error: err})
+      return res.status(500).json({error: err.message})
     }
   },
 

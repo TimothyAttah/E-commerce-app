@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Add, Remove } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
-// import StripeCheckout from 'react-stripe-checkout';
+import StripeCheckout from 'react-stripe-checkout';
 import { Announcement } from '../../components/Announcement';
 import { Footer } from '../../components/footer/Footer';
-import { images } from '../../components/images';
 import { Navbar } from '../../components/nav/Navbar';
 import {
 	Container,
@@ -36,11 +35,36 @@ import {
 	Hr,
 	Details,
 } from './CartStyles';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { userRequest } from '../../requestMethods';
 
 const KEY = process.env.REACT_APP_STRIPE;
 
 export const Cart = () => {
-	const cart = useSelector(state => state.cart);
+	const cart = useSelector( state => state.cart );
+	const [stripeToken, setStripeToken] = useState(null);
+	const history = useHistory();
+	const onToken = token => {
+		console.log('stripe token >>>>', token);
+		setStripeToken(token);
+	};
+
+	useEffect(() => {
+		const makeRequest = async () => {
+			try {
+				const res = userRequest.post('/checkout/payment', {
+					tokenId: stripeToken,
+					amount: cart.total * 100
+				});
+				console.log(res.data);
+				history.push('/success');
+			} catch (err) {
+				console.log(err.message);
+			}
+		};
+		stripeToken && makeRequest();
+	}, [stripeToken, cart.total, history]);
 	return (
 		<Container>
 			<Navbar />
@@ -87,33 +111,8 @@ export const Cart = () => {
 							</Product>
 						))}
 						<Hr />
-						<Product>
-							<ProductDetail>
-								<Image src={images.Img15} alt='' />
-								<Details>
-									<ProductName>
-										<b>Product:</b> Hakura t-shirt
-									</ProductName>
-									<ProductId>
-										<b>ID:</b> 9375630965421
-									</ProductId>
-									<ProductColor color='gray' />
-									<ProductSize>
-										<b>Size:</b> m{' '}
-									</ProductSize>
-								</Details>
-							</ProductDetail>
-							<PriceDetail>
-								<ProductAmountContainer>
-									<Add />
-									<ProductAmount>1</ProductAmount>
-									<Remove />
-								</ProductAmountContainer>
-								<ProductPrice>$ 20</ProductPrice>
-							</PriceDetail>
-						</Product>
 					</Info>
-					{/* <Summary>
+					<Summary>
             <SummaryTitle>Order summary</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
@@ -130,29 +129,20 @@ export const Cart = () => {
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ { cart.total }</SummaryItemPrice>
-            </SummaryItem>
+						</SummaryItem>
+						<StripeCheckout
+					name='Visionary Store'
+					image='https://avatars.githubusercontent.com/u/1486366?v=4'
+					billingAddress
+					shippingAddress
+					description={`Your total is $${cart.total}`}
+					amount={cart.total * 100}
+					token={onToken}
+					stripeKey={KEY}
+						>
             <SummaryButton>Checkout now</SummaryButton>
-          </Summary> */}
-					<Summary>
-						<SummaryTitle>Order summary</SummaryTitle>
-						<SummaryItem>
-							<SummaryItemText>Subtotal</SummaryItemText>
-							<SummaryItemPrice>$ 80</SummaryItemPrice>
-						</SummaryItem>
-						<SummaryItem>
-							<SummaryItemText>Estimated Shipping</SummaryItemText>
-							<SummaryItemPrice>$ 5.90</SummaryItemPrice>
-						</SummaryItem>
-						<SummaryItem>
-							<SummaryItemText>Shipping Discount</SummaryItemText>
-							<SummaryItemPrice>$ -5.90</SummaryItemPrice>
-						</SummaryItem>
-						<SummaryItem type='total'>
-							<SummaryItemText>Total</SummaryItemText>
-							<SummaryItemPrice>$ 80</SummaryItemPrice>
-						</SummaryItem>
-						<SummaryButton>Checkout now</SummaryButton>
-					</Summary>
+				</StripeCheckout>
+          </Summary>
 				</Bottom>
 			</Wrapper>
 			<Footer />

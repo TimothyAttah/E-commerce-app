@@ -6,6 +6,7 @@ import { Login } from './pages/login/Login';
 import { Product } from './pages/products/Product';
 import { ProductList } from './pages/products/ProductList';
 import { Register } from './pages/register/Register';
+import { Success } from './pages/Success';
 
 export const App = () => {
 	 const user = true;
@@ -23,6 +24,9 @@ export const App = () => {
 				</Route>
 				<Route path='/cart' exact>
 					<Cart />
+				</Route>
+				<Route path='/success' exact>
+					<Success />
 				</Route>
 				<Route path='/login' exact>
 					{user ? <Redirect to='/' /> : <Login />}

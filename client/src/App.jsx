@@ -9,7 +9,7 @@ import { Register } from './pages/register/Register';
 import { Success } from './pages/Success';
 
 export const App = () => {
-	 const user = true;
+	 const user = false;
 	return (
 		<Router>
 			<Switch>

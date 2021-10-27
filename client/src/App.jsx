@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import { Cart } from './pages/cart/Cart';
 import { Home } from './pages/home/Home';
@@ -9,7 +10,7 @@ import { Register } from './pages/register/Register';
 import { Success } from './pages/Success';
 
 export const App = () => {
-	 const user = false;
+	const user = useSelector(state => state.user.currentUser);
 	return (
 		<Router>
 			<Switch>

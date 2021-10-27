@@ -52,14 +52,14 @@ export const Products = ({ cat, filters, sort }) => {
   return (
     <Container>
       
-      {/* {cat
+      {cat
         ? filteredProducts.map(item => <Product key={item.id} item={item} />)
-        : products?.map(item => <Product key={item.id} item={item} />)} */}
+        : products?.map(item => <Product key={item.id} item={item} />)}
       
 
-      {popularProducts.map(item => (
+      {/* {popularProducts.map(item => (
         <Product key={item._id} item={item} />
-      ))}
+      ))} */}
     </Container>
   );
 };

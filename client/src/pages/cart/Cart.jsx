@@ -36,7 +36,6 @@ import {
 	Details,
 } from './CartStyles';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 import { userRequest } from '../../requestMethods';
 
 const KEY = process.env.REACT_APP_STRIPE;
@@ -53,17 +52,17 @@ export const Cart = () => {
 	useEffect(() => {
 		const makeRequest = async () => {
 			try {
-				const res = userRequest.post('/checkout/payment', {
-					tokenId: stripeToken,
+				const res = await userRequest.post('/checkout/payment', {
+					tokenId: stripeToken.id,
 					amount: cart.total * 100
 				});
 				console.log(res.data);
-				history.push('/success');
+				history.push('/success', {data: res.data});
 			} catch (err) {
 				console.log(err.message);
 			}
 		};
-		stripeToken && makeRequest();
+		stripeToken  && makeRequest();
 	}, [stripeToken, cart.total, history]);
 	return (
 		<Container>

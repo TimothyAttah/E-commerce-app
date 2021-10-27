@@ -11,7 +11,7 @@ import { Footer } from '../../components/footer/Footer';
 import { mobile } from '../../responsive';
 import { Add, Remove } from '@material-ui/icons';
 import { publicRequest } from '../../requestMethods';
-import { addProduct } from '../../redux/cartRedux';
+import { addProduct } from '../../redux/cartSlice';
 
 const Container = styled.div``;
 const Wrapper = styled.div`

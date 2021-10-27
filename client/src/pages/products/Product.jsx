@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Navbar } from '../../components/nav/Navbar';
 import { Announcement } from '../../components/Announcement';
 import { Newsletter } from '../../components/Newsletter';
@@ -11,7 +11,7 @@ import { Footer } from '../../components/footer/Footer';
 import { mobile } from '../../responsive';
 import { Add, Remove } from '@material-ui/icons';
 import { publicRequest } from '../../requestMethods';
-// import { addProduct } from '../../redux/cartRedux';
+import { addProduct } from '../../redux/cartRedux';
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -124,7 +124,7 @@ export const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState('');
   const [ size, setSize ] = useState( '' );
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -147,13 +147,13 @@ export const Product = () => {
     }
   };
 
-  // const handleClick = () => {
-  //   dispatch(
-  //     addProduct( {
-  //       ...product, quantity, color, size
-  //     } )
-  //   );
-  // };
+  const handleClick = () => {
+    dispatch(
+      addProduct( {
+        ...product, quantity, color, size
+      } )
+    );
+  };
   return (
     <Container>
       <Navbar />
@@ -188,7 +188,7 @@ export const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity('inc')} />
             </AmountContainer>
-            <Button>Add to cart</Button>
+            <Button onClick={handleClick}>Add to cart</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

@@ -8,7 +8,7 @@ import { ProductList } from './pages/products/ProductList';
 import { Register } from './pages/register/Register';
 
 export const App = () => {
-	 const user = false;
+	 const user = true;
 	return (
 		<Router>
 			<Switch>

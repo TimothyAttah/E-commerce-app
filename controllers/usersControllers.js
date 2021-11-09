@@ -15,10 +15,12 @@ const userControllers = {
 		}
 	
 		try {
-			const updatedUser = await User.findByIdAndUpdate( req.params.id, {
+			const updatedUser = await User.findByIdAndUpdate( id, {
 				$set: req.body
 			}, { new: true } )
-			res.status(200).json({message: "Updated successfully", updatedUser})
+				const { password, ...others } = updatedUser._doc;
+			req.user.password = undefined;
+			res.status(200).json({message: "Updated successfully", others})
 		} catch (err) {
 			return res.status(500).json({ error: err });
 		}
@@ -33,6 +35,7 @@ const userControllers = {
 		return res.status(500).json({ error: err });
 	}
 	},
+
 	// GET USER
 	getUser: async (req, res) => {
 	try {
@@ -47,10 +50,12 @@ const userControllers = {
 	getUsers: async ( req, res ) => {
 		const query = req.query.new
 	try {
-		const users = query ? await User.find().sort({_id: -1}).limit(5) : await User.find()
-		res.status( 200 ).json( users); 
+		const users = query ? await User.find().sort( { _id: -1 } ).limit( 5 ) : await User.find().sort({_id:-1})
+		// const { password, ...others } = users._doc;
+		// req.user.password = undefined;
+		res.status( 200 ).json( users ); 
 	} catch (err) {
-		return res.status(500).json({ error: err });
+		return res.status(500).json({ error: err.message });
 	}
 	},
 	// GET USER STATS
@@ -58,11 +63,11 @@ const userControllers = {
 		const date = new Date();
 		const lastYear = new Date( date.setFullYear( date.getFullYear() - 1 ) );
 	try {
-		const data = await User.aggregate( [
+		const data = await User.aggregate([
 			{ $match: { createdAt: { $gte: lastYear } } },
-			{ $project: { month: { $month: "$createdAt" } } },
-			{ $group: { _id: "$month", total: { $sum: 1 } } }
-		] );
+			{ $project: { month: { $month: '$createdAt' } } },
+			{ $group: { _id: '$month', total: { $sum: 1 } } },
+		]);
 		res.status( 200 ).json( data );
 	} catch (err) {
 		return res.status(500).json({ error: err });

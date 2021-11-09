@@ -10,12 +10,19 @@ const connectDB = require('./config/db');
 
 connectDB();
 
-// app.use('/api/auth', require('./routes/authRoute'));
-// app.use('/api/users', require('./routes/usersRoute'));
-// app.use('/api/products', require('./routes/productRoute'));
-// app.use('/api/carts', require('./routes/cartRoute'));
-// app.use('/api/orders', require('./routes/orderRoute'));
-// app.use('/api/checkout', require('./routes/stripeRoute'));
+app.use( cors() );
+app.use( express.json() );
+
+app.get( '/', ( req, res ) => {
+	res.send('hello world')
+})
+
+app.use('/api/auth', require('./routes/authRoute'));
+app.use('/api/users', require('./routes/usersRoute'));
+app.use('/api/products', require('./routes/productRoute'));
+app.use('/api/carts', require('./routes/cartRoute'));
+app.use('/api/orders', require('./routes/orderRoute'));
+app.use('/api/checkout', require('./routes/stripeRoute'));
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));

@@ -44,7 +44,7 @@ export const categories = [
     _id: 3,
     img: `${images.Img17}`,
     title: 'light jackets',
-    category: 'jeans',
+    category: 'joggers',
   },
 ];
 

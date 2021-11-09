@@ -52,7 +52,7 @@ const authControllers = {
 			if (hashedPassword !== password)
 				return res
 					.status(400)
-					.json({ error: 'Password or password is Incorrect.' });
+					.json({ error: 'Password or Email is Incorrect.' });
 
 			const accessToken = jwt.sign(
 				{
@@ -64,7 +64,7 @@ const authControllers = {
 			);
 			user.password = undefined;
 			// const { password, ...others } = user._doc;
-			res.status(201).json({ message: 'User successfully logged in.', user, accessToken });
+			res.status(200).json({ message: 'User successfully logged in.', user, accessToken });
 		} catch (err) {
 			res.status(500).json({ error: err });
 		}

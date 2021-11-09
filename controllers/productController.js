@@ -8,9 +8,10 @@ const productControllers = {
       const savedProduct = await newProduct.save();
       res.status( 200 ).json( { message: 'New product added', savedProduct } );
     } catch (err) {
-      return res.status(500).json({error: err})
+      return res.status(500).json({error: err.message})
     }
   },
+
   // UPDATE
   updateProduct: async ( req, res ) => {
     try {
@@ -28,6 +29,7 @@ const productControllers = {
        return res.status(500).json({ error: err });
     }
   },
+
   // DELETE
   deleteProduct: async ( req, res ) => {
     try {
@@ -37,6 +39,7 @@ const productControllers = {
        return res.status(500).json({ error: err });
     }
   },
+
   // GET PRODUCT
   getProduct: async ( req, res ) => {
     try {
@@ -46,6 +49,7 @@ const productControllers = {
        return res.status(500).json({ error: err });
     }
   },
+
   // GET ALL PRODUCT
   getAllProducts: async ( req, res ) => {
     const qNew = req.query.new;
@@ -61,7 +65,7 @@ const productControllers = {
           }
         } );
       }else {
-        products = await Product.find();
+        products = await Product.find().sort({createdAt: -1});
       }
       res.status(200).json({ message: ' All Products... ', products});
     } catch (err) {

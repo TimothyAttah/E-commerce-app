@@ -51,34 +51,34 @@ export const categories = [
 export const popularProducts = [
   {
     _id: 1,
-    img: `${ images.Photo5 }`,
+    img: `${ images.Img1 }`,
   },
   {
     _id: 2,
-    img: `${ images.Photo6 }`,
+    img: `${ images.Img13 }`,
   },
   {
     _id: 3,
-    img: `${ images.Photo20 }`,
+    img: `${ images.Img10 }`,
   },
   {
     _id: 4,
-    img: `${ images.Photo21 }`,
+    img: `${ images.Img15 }`,
   },
   {
     _id: 5,
-    img: `${ images.Photo22 }`,
+    img: `${ images.Img4 }`,
   },
   {
     _id: 6,
-    img: `${ images.Photo23 }`,
+    img: `${ images.Img9 }`,
   },
   {
     _id: 7,
-    img: `${ images.Photo24 }`,
+    img: `${ images.Img11 }`,
   },
   {
     _id: 8,
-    img: `${ images.Photo25 }`,
+    img: `${ images.Img12 }`,
   },
 ];

@@ -24,7 +24,8 @@ export const Products = ({ cat, filters, sort }) => {
         const res = await axios.get(
           cat ? `/products?category=${cat}` : '/products'
         );
-        setProducts(res.data);
+        console.log('products >>>>>>', res.data.products);
+        setProducts(res.data.products);
       } catch (err) {
         console.log(err);
       }
@@ -37,7 +38,7 @@ export const Products = ({ cat, filters, sort }) => {
       && setFilteredProducts(
         products.filter( item => Object.entries( filters ).every( ( [ key, value ] ) => item[ key ].includes( value ) ) )
       );
-  }, [ cat, filters ] );
+  }, [products,  cat, filters, ] );
 
   useEffect( () => {
     if ( sort === 'newest' ) {
@@ -50,12 +51,15 @@ export const Products = ({ cat, filters, sort }) => {
   }, [ sort ] );
   return (
     <Container>
-      {/* {cat
+      
+      {cat
         ? filteredProducts.map(item => <Product key={item.id} item={item} />)
-        : products.slice(0, 8).map(item => <Product key={item.id} item={item} />)} */}
-      {popularProducts.map(item => (
-        <Product key={item.id} item={item} />
-      ))}
+        : products?.map(item => <Product key={item.id} item={item} />)}
+      
+
+      {/* {popularProducts.map(item => (
+        <Product key={item._id} item={item} />
+      ))} */}
     </Container>
   );
 };

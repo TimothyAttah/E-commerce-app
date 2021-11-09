@@ -48,6 +48,14 @@ export const Button = styled.button`
 	background-color: teal;
 	color: white;
 	margin-bottom: 10px;
+	&:disabled{
+		color: green;
+		cursor: not-allowed;
+	}
+`;
+
+export const Error = styled.span`
+	color: red;
 `;
 
 export const LinkContainer = styled.a`

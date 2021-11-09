@@ -32,7 +32,7 @@ export const categories = [
     _id: 1,
     img: `${images.Photo2}`,
     title: 'shirt style',
-    category: 'women',
+    category: 'woman',
   },
   {
     _id: 2,
@@ -44,7 +44,7 @@ export const categories = [
     _id: 3,
     img: `${images.Img17}`,
     title: 'light jackets',
-    category: 'joggers',
+    category: 'man',
   },
 ];
 

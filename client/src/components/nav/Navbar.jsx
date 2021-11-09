@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search, ShoppingCartOutlined } from '@material-ui/icons';
 import { Badge } from '@material-ui/core';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   Container, Center, Language,
   Left, Logo, Right, Input,
@@ -11,7 +11,11 @@ import {
 
 
 export const Navbar = () => {
-  // const quantity = useSelector(state => state.cart.quantity );
+  const quantity = useSelector( state => state.cart.quantity );
+  const cart = useSelector( state => state.cart );
+  
+  console.log('qun', quantity);
+  console.log('cart', cart);
   return (
     <Container>
       <Wrapper>
@@ -30,7 +34,7 @@ export const Navbar = () => {
           <MenuItem>Signin</MenuItem>
           <Link to="/cart">
             <MenuItem>
-              <Badge badgeContent={4} color="primary">
+              <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartOutlined />
               </Badge>
             </MenuItem>

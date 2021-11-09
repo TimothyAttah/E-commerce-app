@@ -2,16 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Navbar } from '../../components/nav/Navbar';
 import { Announcement } from '../../components/Announcement';
 import { Newsletter } from '../../components/Newsletter';
 import { Footer } from '../../components/footer/Footer';
-import { images } from '../../components/images';
+// import { images } from '../../components/images';
 import { mobile } from '../../responsive';
 import { Add, Remove } from '@material-ui/icons';
-// import { publicRequest } from '../../requestMethods';
-// import { addProduct } from '../../redux/cartRedux';
+import { publicRequest } from '../../requestMethods';
+import { addProduct } from '../../redux/cartSlice';
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -124,19 +124,20 @@ export const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState('');
   const [ size, setSize ] = useState( '' );
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const getProduct = async () => {
-  //     try {
-  //       const res = await publicRequest.get(`/products/find/${id}`);
-  //       setProduct(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getProduct();
-  // }, [id]);
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get( `/products/find/${ id }` );
+        console.log('find product', res.data);
+        setProduct(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProduct();
+  }, [id]);
 
   const handleQuantity = type => {
     if (type === 'dec') {
@@ -146,60 +147,38 @@ export const Product = () => {
     }
   };
 
-  // const handleClick = () => {
-  //   dispatch(
-  //     addProduct( {
-  //       ...product, quantity, color, size
-  //     } )
-  //   );
-  // };
+  const handleClick = () => {
+    dispatch(
+      addProduct( {
+        ...product, quantity, color, size
+      } )
+    );
+  };
   return (
     <Container>
       <Navbar />
       <Announcement />
       <Wrapper>
         <ImageContainer>
-          {/* <Image src={product.img} alt="" /> */}
-          <Image src={images.Img16} alt="" />
+          <Image src={product.img} alt="" />
         </ImageContainer>
         <InfoContainer>
-          {/* <Title>{product.title}</Title> */}
-          <Title>Denim Shoes</Title>
-          {/* <Desc>{product.desc}</Desc> */}
-          <Desc>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet
-            quaerat quas iusto, officia dolor fuga laboriosam earum obcaecati,
-            impedit ipsam, ipsa veniam quibusdam. Perferendis quo cumque
-            impedit, exercitationem et qui?
-          </Desc>
-          {/* <Price> $ { product.price }</Price> */}
-          <Price> $ 20</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price> $ { product.price }</Price>
           <FilterContainer>
-            {/* <Filter>
+            <Filter>
               <FilterTitle>Color</FilterTitle>
               { product?.color?.map( c => (
                 <FilterColor color={c} key={c} onClick={()=> setColor(c)} />
               ))}
-            </Filter> */}
-            <Filter>
-              <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              {/* <FilterSize onChange={(e) => setSize(e.target.value)}>
+              <FilterSize onChange={(e) => setSize(e.target.value)}>
                 { product?.size?.map( s => (
                   <FilterSizeOption key={s}>{ s }</FilterSizeOption>
                 ))}
-              </FilterSize> */}
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
               </FilterSize>
             </Filter>
           </FilterContainer>
@@ -209,7 +188,7 @@ export const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity('inc')} />
             </AmountContainer>
-            <Button>Add to cart</Button>
+            <Button onClick={handleClick}>Add to cart</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

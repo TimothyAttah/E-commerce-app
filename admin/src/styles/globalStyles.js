@@ -2,6 +2,16 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 /*--------------General style---------------- */
+
+  :root{
+    --text-white: #ffffff;
+    --text-black: #000000;
+    --bg-white: #ffffff;
+    --bg-black: #000000;
+    --text-gray: #555555;
+  }
+
+
   *{
     margin: 0;
     padding: 0;
@@ -33,5 +43,9 @@ a {
 input {
 	outline: none;
   border: none;
+}
+img{
+  vertical-align: middle;
+  width: 100%;
 }
 `;

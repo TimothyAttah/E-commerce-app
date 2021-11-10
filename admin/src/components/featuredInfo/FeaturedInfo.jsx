@@ -20,10 +20,11 @@ export const FeaturedTitle = styled.span`
 	font-size: 1.4rem;
 `;
 export const FeaturedSubTitle = styled.span`
-	
+	font-size: 1.1rem;
+  color: var(--gray);
 `;
 export const FeaturedMoneyContainer = styled.div`
-	margin: 10px 0;
+	margin: 15px 0;
   display: flex;
   align-items: center;
 `;
@@ -37,11 +38,11 @@ export const FeaturedMoneyRate = styled.span`
 	margin-left: 20px;
 	.MuiSvgIcon-root {
 		margin-left: 5px;
-		font-size: 1.3rem;
-    color: red;
+		font-size: 1rem;
+    color: var(--red);
 	}
   .featuredIcon{
-    color: green;
+    color: var(--green);
   }
 `;
 

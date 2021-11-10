@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { sidebarLists } from '../helper';
 
@@ -39,6 +39,7 @@ export const SidebarListItem = styled.li`
 `;
 
 export const Sidebar = () => {
+  // const [ active, setActive ] = useState( false );
   return (
 		<Container>
 			<SidebarWrapper>

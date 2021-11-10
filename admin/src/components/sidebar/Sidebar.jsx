@@ -1,6 +1,6 @@
-import { LineStyle, Mail, PermIdentity, Report, Timeline, TrendingUp, WorkOutline } from '@material-ui/icons';
 import React from 'react';
 import styled from 'styled-components';
+import { sidebarLists } from '../helper';
 
 export const Container = styled.div`
   flex:1;
@@ -40,81 +40,22 @@ export const SidebarListItem = styled.li`
 
 export const Sidebar = () => {
   return (
-    <Container>
-      <SidebarWrapper>
-        <SidebarMenu>
-          <SidebarTitle>Dashboard</SidebarTitle>
-          <SidebarList>
-            <SidebarListItem>
-              <LineStyle />
-              Home
-            </SidebarListItem>
-            <SidebarListItem>
-              <Timeline />
-              Analytics
-            </SidebarListItem>
-            <SidebarListItem>
-              <TrendingUp />
-              Sales
-            </SidebarListItem>
-          </SidebarList>
-        </SidebarMenu>
-        <SidebarMenu>
-          <SidebarTitle>Quick Menu</SidebarTitle>
-          <SidebarList>
-            <SidebarListItem>
-              <PermIdentity />
-              Users
-            </SidebarListItem>
-            <SidebarListItem>
-              <PermIdentity />
-              Products
-            </SidebarListItem>
-            <SidebarListItem>
-              <PermIdentity />
-              Transactions
-            </SidebarListItem>
-            <SidebarListItem>
-              <TrendingUp />
-              Reports
-            </SidebarListItem>
-          </SidebarList>
-        </SidebarMenu>
-        <SidebarMenu>
-          <SidebarTitle>Notifications</SidebarTitle>
-          <SidebarList>
-            <SidebarListItem>
-              <Mail />
-              Mail
-            </SidebarListItem>
-            <SidebarListItem>
-              <Timeline />
-              Feedback
-            </SidebarListItem>
-            <SidebarListItem>
-              <TrendingUp />
-              Messages
-            </SidebarListItem>
-          </SidebarList>
-        </SidebarMenu>
-        <SidebarMenu>
-          <SidebarTitle>Staff</SidebarTitle>
-          <SidebarList>
-            <SidebarListItem>
-              <WorkOutline />
-              Manager
-            </SidebarListItem>
-            <SidebarListItem>
-              <Timeline />
-              Analytics
-            </SidebarListItem>
-            <SidebarListItem>
-              <Report />
-              Reports
-            </SidebarListItem>
-          </SidebarList>
-        </SidebarMenu>
-      </SidebarWrapper>
-    </Container>
-  )
+		<Container>
+			<SidebarWrapper>
+				{sidebarLists.map(item => (
+					<SidebarMenu>
+						<SidebarTitle>{item.title}</SidebarTitle>
+						<SidebarList>
+							{item.sidebarListsItems.map(item => (
+								<SidebarListItem>
+									{item.icon}
+									{item.name}
+								</SidebarListItem>
+							))}
+						</SidebarList>
+					</SidebarMenu>
+				))}
+			</SidebarWrapper>
+		</Container>
+	);
 }

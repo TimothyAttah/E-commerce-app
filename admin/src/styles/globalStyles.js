@@ -9,6 +9,9 @@ export const GlobalStyle = createGlobalStyle`
     --bg-white: #ffffff;
     --bg-black: #000000;
     --text-gray: #555555;
+    --light-bg: rgb(251,251,255);
+    --light-gray: rgb(187,186,186);
+    --dark-gray: rgb(240,240,255);
   }
 
 

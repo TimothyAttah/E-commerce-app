@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import {  NavLink } from 'react-router-dom';
 import { sidebarLists } from '../helper';
 
 export const Container = styled.div`
@@ -29,17 +30,28 @@ export const SidebarListItem = styled.li`
 	display: flex;
 	align-items: center;
 	border-radius: 10px;
-	.MuiSvgIcon-root{
-    margin-right: 5px;
-    font-size: 1.1rem;
-  }
-   :hover {
+	.MuiSvgIcon-root {
+		margin-right: 5px;
+		font-size: 1.1rem;
+	}
+	:hover {
 		background-color: var(--dark-gray);
+	}
+	a {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		border-radius: 10px;
+		padding: 5px;
+		color: var(--text-gray);
 	}
 `;
 
+export const activeLink = {
+	backgroundColor: 'var(--dark-gray)'
+}
+
 export const Sidebar = () => {
-  // const [ active, setActive ] = useState( false );
   return (
 		<Container>
 			<SidebarWrapper>
@@ -47,10 +59,19 @@ export const Sidebar = () => {
 					<SidebarMenu>
 						<SidebarTitle>{item.title}</SidebarTitle>
 						<SidebarList>
-							{item.sidebarListsItems.map(item => (
-								<SidebarListItem>
-									{item.icon}
-									{item.name}
+							{item.sidebarListsItems.map(list => (
+								<SidebarListItem key={list.name}>
+									{list.path ? (
+										<NavLink to={list.path} exact activeStyle={activeLink}>
+											{list.icon}
+											{list.name}
+										</NavLink>
+									) : (
+										<>
+											{list.icon}
+											{list.name}
+										</>
+									)}
 								</SidebarListItem>
 							))}
 						</SidebarList>

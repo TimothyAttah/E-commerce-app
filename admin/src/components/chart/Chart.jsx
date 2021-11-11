@@ -4,10 +4,8 @@ import {
   LineChart,
   Line,
   XAxis,
-  YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer
 } from 'recharts';
  
@@ -21,71 +19,19 @@ export const Container = styled.div`
 export const ChartTitle = styled.h3`
   margin-bottom: 20px;
 `;
-// export const ChartTitle = styled.h3`
 
-// `;
 
-export const Chart = () => {
-  const data = [
-    {
-      name: 'Jan',
-      'Active user': 4000,
-    },
-    {
-      name: 'Feb',
-      'Active user': 3000,
-    },
-    {
-      name: 'Mar',
-      'Active user': 2245,
-    },
-    {
-      name: 'Apr',
-      'Active user': 1545,
-    },
-    {
-      name: 'May',
-      'Active user': 2160,
-    },
-    {
-      name: 'Jun',
-      'Active user': 3310,
-    },
-    {
-      name: 'Jul',
-      'Active user': 2330,
-    },
-    {
-      name: 'Aug',
-      'Active user': 2110,
-    },
-    {
-      name: 'Sep',
-      'Active user': 2340,
-    },
-    {
-      name: 'Oct',
-      'Active user': 2400,
-    },
-    {
-      name: 'Nov',
-      'Active user': 1500,
-    },
-    {
-      name: 'Dec',
-      'Active user': 1000,
-    },
-  ]
+
+export const Chart = ({title, data, activeData, grid}) => {
   return (
 		<Container>
-			<ChartTitle>User Analytics</ChartTitle>
+			<ChartTitle>{title}</ChartTitle>
 			<ResponsiveContainer width='100%' aspect={4 / 1}>
 				<LineChart data={data}>
 					<XAxis dataKey='name' stroke='#5550bd' />
-					{/* <YAxis /> */}
-					<Line type='monotone' dataKey='Active user' stroke='#5550bd' />
+					<Line type='monotone' dataKey={activeData} stroke='#5550bd' />
           <Tooltip />
-          <CartesianGrid stroke='#e0dfdf' strokeDasharray='5 5' />
+          { grid && <CartesianGrid stroke='#e0dfdf' strokeDasharray='5 5' /> }
         </LineChart>
 			</ResponsiveContainer>
 		</Container>

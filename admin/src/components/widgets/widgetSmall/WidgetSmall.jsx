@@ -11,7 +11,7 @@ export const Container = styled.div`
   padding: 20px;
   margin-right: 20px;
 `;
-export const WidgetTitle = styled.span`
+export const WidgetTitle = styled.h3`
   font-size: 1.5rem;
   font-weight: 600;
 `;

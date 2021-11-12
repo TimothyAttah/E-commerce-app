@@ -10,6 +10,7 @@ import {
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { Chart } from '../../components/chart/Chart';
 import { images } from '../../components/images';
 
 export const Container = styled.div`
@@ -143,6 +144,19 @@ export const ProductUpdateButton = styled.button`
 	font-weight: 600;
 `;
 
+export const ProductTop = styled.div`
+
+`;
+export const ProductTopLeft = styled.div`
+
+`;
+export const ProductTopRight = styled.div`
+
+`;
+export const ProductBottom = styled.div`
+
+`;
+
 export const ProductUpdate = () => {
 	return (
 		<Container>
@@ -151,8 +165,19 @@ export const ProductUpdate = () => {
 				<Link to='/products/create/product'>
 					<ProductButton>Create</ProductButton>
 				</Link>
-			</ProductTitleContainer>
-			<ProductContainer>
+      </ProductTitleContainer>
+      <ProductTop>
+        <ProductTopLeft>
+          <Chart />
+        </ProductTopLeft>
+        <ProductTopRight>
+
+        </ProductTopRight>
+      </ProductTop>
+      <ProductBottom>
+
+      </ProductBottom>
+			{/* <ProductContainer>
 				<ProductShowContainer>
 					<ProductShowTop>
 						<Avatar>
@@ -227,7 +252,7 @@ export const ProductUpdate = () => {
 						</ProductUpdateRight>
 					</ProductUpdateForm>
 				</ProductUpdateContainer>
-			</ProductContainer>
+			</ProductContainer> */}
 		</Container>
 	);
 };

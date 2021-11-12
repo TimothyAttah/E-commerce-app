@@ -6,29 +6,37 @@ export const Container = styled.div`
 `;
 export const NewProductTitle = styled.h1``;
 export const NewProductForm = styled.form`
-	display: flex;
-	flex-wrap: wrap;
+	/* display: flex;
+	flex-wrap: wrap; */
+  margin-top: 10px;
 `;
 export const NewProductFormItem = styled.div`
-	width: 400px;
+	width: 250px;
 	display: flex;
 	flex-direction: column;
-	margin-top: 10px;
-	margin-right: 20px;
+	margin-bottom: 10px;
+  > input{
+    border: none;
+  }
+	/* margin-right: 20px; */
 	label {
 		margin-bottom: 10px;
 		font-size: 0.8rem;
 		font-weight: 600;
-		color: rgb(151, 150, 150);
+		color: var(--gray);
 	}
 	input {
 		height: 30px;
 		padding: 20px 10px;
 		border: 1px solid var(--gray);
 		border-radius: 5px;
+    :first-child{
+      border: none;
+    }
 	}
 	select {
 		height: 40px;
+    padding: 10px;
 		border-radius: 5px;
 	}
 `;
@@ -61,39 +69,16 @@ export const ProductCreate = () => {
 			<NewProductTitle>New Product</NewProductTitle>
 			<NewProductForm>
 				<NewProductFormItem>
-					<label>Product Name</label>
-					<input type='text' placeholder='john' />
+					<label>Image</label>
+					<input type='file' id='file' />
 				</NewProductFormItem>
 				<NewProductFormItem>
-					<label>Full Name</label>
-					<input type='text' placeholder='John Smith' />
+					<label> Name</label>
+					<input type='text' placeholder='Apple AirPods' />
 				</NewProductFormItem>
 				<NewProductFormItem>
-					<label>Email</label>
-					<input type='email' placeholder='john@gmail.com' />
-				</NewProductFormItem>
-				<NewProductFormItem>
-					<label>Password</label>
-					<input type='password' placeholder='password' />
-				</NewProductFormItem>
-				<NewProductFormItem>
-					<label>Phone</label>
-					<input type='text' placeholder='+123 456 789 0' />
-				</NewProductFormItem>
-				<NewProductFormItem>
-					<label>Address</label>
-					<input type='text' placeholder='New York | USA' />
-				</NewProductFormItem>
-				<NewProductFormItem>
-					<label>Gender</label>
-					<NewProductGender>
-						<input type='radio' name='gender' id='male' value='male' />
-						<label htmlFor='male'>Male</label>
-						<input type='radio' name='gender' id='female' value='female' />
-						<label htmlFor='female'>Female</label>
-						<input type='radio' name='gender' id='other' value='other' />
-						<label htmlFor='other'>Other</label>
-					</NewProductGender>
+					<label>Stock</label>
+					<input type='text' placeholder='123' />
 				</NewProductFormItem>
 				<NewProductFormItem>
 					<label>Active</label>

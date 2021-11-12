@@ -5,6 +5,7 @@ import { Sidebar } from './components/sidebar/Sidebar';
 import { Topbar } from './components/topbar/Topbar'
 import { Home } from './pages/home/Home';
 import { UserList } from './pages/user/UserList';
+import { UserUpdate } from './pages/user/UserUpdate';
 
 export const Container = styled.div`
 	display: flex;
@@ -23,6 +24,9 @@ export const App = () => {
 					</Route>
 					<Route path='/users'>
 						<UserList />
+					</Route>
+					<Route path='/user/edit/:userId'>
+						<UserUpdate />
 					</Route>
 				</Switch>
 			</Container>

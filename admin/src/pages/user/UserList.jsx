@@ -3,7 +3,6 @@ import { DataGrid } from '@material-ui/data-grid';
 import styled, { css } from 'styled-components';
 import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-// import { images } from '../../components/images'
 import { DeleteOutline, EditOutlined } from '@material-ui/icons';
 import { userRows } from '../../components/dummyData';
 
@@ -63,7 +62,7 @@ export const UserList = () => {
       field: 'action', headerName: 'Action', width: 150, renderCell: ( params ) => {
         return (
 					<>
-						<Link to={`/user/${params.row.id}`}>
+						<Link to={`/user/edit/${params.row.id}`}>
 							<UserListButton edit>	<EditOutlined /></UserListButton>
 						</Link>
 						<UserListButton onClick={() => handleDelete(params.row.id)}>

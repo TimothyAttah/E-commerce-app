@@ -8,6 +8,7 @@ import { UserList } from './pages/user/UserList';
 import { UserUpdate } from './pages/user/UserUpdate';
 import { UserCreate } from './pages/user/UserCreate';
 import { ProductList } from './pages/products/ProductList';
+import { ProductUpdate } from './pages/products/ProductUpdate';
 
 export const Container = styled.div`
 	display: flex;
@@ -35,6 +36,9 @@ export const App = () => {
 					</Route>
 					<Route path='/products' >
 						<ProductList />
+					</Route>
+					<Route path='/product/edit/:productId' >
+						<ProductUpdate />
 					</Route>
 				</Switch>
 			</Container>

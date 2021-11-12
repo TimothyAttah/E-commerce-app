@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import styled, { css } from 'styled-components';
 import { Avatar } from '@material-ui/core';
-import { images } from '../../components/images'
+import { Link } from 'react-router-dom';
+// import { images } from '../../components/images'
 import { DeleteOutline, EditOutlined } from '@material-ui/icons';
+import { userRows } from '../../components/dummyData';
 
 export const Container = styled.div`
   flex: 4;
@@ -35,6 +37,12 @@ export const UserListButton = styled.button`
 
 
 export const UserList = () => {
+  const [ data, setData ] = useState( userRows );
+  
+  const handleDelete = id => {
+		setData(data.filter(item => item.id !== id))
+	};
+
   const columns = [
     {field: 'id', headerName: 'ID', width: 100},
     {
@@ -54,71 +62,29 @@ export const UserList = () => {
     {
       field: 'action', headerName: 'Action', width: 150, renderCell: ( params ) => {
         return (
-					<div>
-						<UserListButton edit>
-							<EditOutlined />
-						</UserListButton>
-						<UserListButton>
+					<>
+						<Link to={`/user/${params.row.id}`}>
+							<UserListButton edit>	<EditOutlined /></UserListButton>
+						</Link>
+						<UserListButton onClick={() => handleDelete(params.row.id)}>
 							<DeleteOutline />
 						</UserListButton>
-					</div>
+					</>
 				);
     } },
   ]
 
-  const rows = [
-    {
-      id: 1,
-      username: 'Jon Snow',
-      avatar: <img src={ images.ProPic } alt='' />,
-      email: 'jon@gmail.com',
-      status: 'active',
-      transaction: '$120.00'
-    },
-    {
-      id: 2,
-      username: 'Elizabeth Keen',
-      avatar: <img src={ images.ProPic } alt='' />,
-      email: 'elizabeth@gmail.com',
-      status: 'active',
-      transaction: '$190.00'
-    },
-    {
-      id: 3,
-      username: 'Matthew Peters',
-      avatar: <img src={ images.ProPic } alt='' />,
-      email: 'matthew@gmail.com',
-      status: 'active',
-      transaction: '$155.00'
-    },
-    {
-      id: 4,
-      username: 'Mark Leonard',
-      avatar: <img src={ images.ProPic } alt='' />,
-      email: 'mark@gmail.com',
-      status: 'active',
-      transaction: '$165.00'
-    },
-    {
-      id: 5,
-      username: 'Esther Susan',
-      avatar: <img src={ images.ProPic } alt='' />,
-      email: 'esther@gmail.com',
-      status: 'active',
-      transaction: '$150.00'
-    },
-    {
-      id: 6,
-      username: 'Bridget Starwood',
-      avatar: <img src={ images.ProPic } alt='' />,
-      email: 'bridget@gmail.com',
-      status: 'active',
-      transaction: '$125.00'
-    },
-  ]
+  
+  
   return (
     <Container>
-      <DataGrid rows={rows} disableSelectionOnClick columns={columns} pageSize={5} checkboxSelection />
+      <DataGrid
+        rows={ data }
+        disableSelectionOnClick
+        columns={ columns }
+        pageSize={ 5 }
+        checkboxSelection
+      />
     </Container>
   )
 }

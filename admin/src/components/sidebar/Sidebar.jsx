@@ -56,7 +56,7 @@ export const Sidebar = () => {
 		<Container>
 			<SidebarWrapper>
 				{sidebarLists.map(item => (
-					<SidebarMenu>
+					<SidebarMenu key={item.title}>
 						<SidebarTitle>{item.title}</SidebarTitle>
 						<SidebarList>
 							{item.sidebarListsItems.map(list => (

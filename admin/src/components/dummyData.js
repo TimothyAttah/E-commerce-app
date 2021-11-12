@@ -1,3 +1,5 @@
+import { images } from "./images";
+
 export const userData = [
 	{
 		name: 'Jan',
@@ -46,5 +48,72 @@ export const userData = [
 	{
 		name: 'Dec',
 		'Active user': 1000,
+	},
+];
+
+export const userRows = [
+	{
+		id: 1,
+		username: 'Jon Snow',
+		avatar: <img src={images.ProPic} alt='' />,
+		email: 'jon@gmail.com',
+		status: 'active',
+		transaction: '$120.00',
+	},
+	{
+		id: 2,
+		username: 'Elizabeth Keen',
+		avatar: <img src={images.ProPic} alt='' />,
+		email: 'elizabeth@gmail.com',
+		status: 'active',
+		transaction: '$190.00',
+	},
+	{
+		id: 3,
+		username: 'Matthew Peters',
+		avatar: <img src={images.ProPic} alt='' />,
+		email: 'matthew@gmail.com',
+		status: 'active',
+		transaction: '$155.00',
+	},
+	{
+		id: 4,
+		username: 'Mark Leonard',
+		avatar: <img src={images.ProPic} alt='' />,
+		email: 'mark@gmail.com',
+		status: 'active',
+		transaction: '$165.00',
+	},
+	{
+		id: 5,
+		username: 'Esther Susan',
+		avatar: <img src={images.ProPic} alt='' />,
+		email: 'esther@gmail.com',
+		status: 'active',
+		transaction: '$150.00',
+	},
+	{
+		id: 6,
+		username: 'Bridget Starwood',
+		avatar: <img src={images.ProPic} alt='' />,
+		email: 'bridget@gmail.com',
+		status: 'active',
+		transaction: '$125.00',
+	},
+	{
+		id: 7,
+		username: 'Bridget Starwood',
+		avatar: <img src={images.ProPic} alt='' />,
+		email: 'bridget@gmail.com',
+		status: 'active',
+		transaction: '$125.00',
+	},
+	{
+		id: 8,
+		username: 'Bridget Starwood',
+		avatar: <img src={images.ProPic} alt='' />,
+		email: 'bridget@gmail.com',
+		status: 'active',
+		transaction: '$125.00',
 	},
 ];

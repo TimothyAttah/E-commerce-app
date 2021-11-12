@@ -28,6 +28,8 @@ export const UserListButton = styled.button`
 			background-color: #3bb077;
 			color: var(--text-white);
 			margin-right: 20px;
+      display: flex;
+      align-items: center;
 		`}
 `;
 // export const UserListUser = styled.div`

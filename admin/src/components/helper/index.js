@@ -40,7 +40,7 @@ export const sidebarLists = [
 			{
 				icon: <Timeline />,
 				name: 'Products',
-				// path: '/',
+				path: '/products',
 			},
 			{
 				icon: <TrendingUp />,

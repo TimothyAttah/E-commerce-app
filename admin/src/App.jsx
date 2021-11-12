@@ -7,6 +7,7 @@ import { Home } from './pages/home/Home';
 import { UserList } from './pages/user/UserList';
 import { UserUpdate } from './pages/user/UserUpdate';
 import { UserCreate } from './pages/user/UserCreate';
+import { ProductList } from './pages/products/ProductList';
 
 export const Container = styled.div`
 	display: flex;
@@ -31,6 +32,9 @@ export const App = () => {
 					</Route>
 					<Route path='/users/create/user' >
 						<UserCreate />
+					</Route>
+					<Route path='/products' >
+						<ProductList />
 					</Route>
 				</Switch>
 			</Container>

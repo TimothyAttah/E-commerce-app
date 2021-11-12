@@ -24,7 +24,7 @@ export const TopbarLeft = styled.div`
   .logo{
     font-weight: bold;
     font-size:1.8rem;
-    color: var(--barkBlue);
+    color: var(--darkBlue);
     cursor: pointer;
   }
 `;

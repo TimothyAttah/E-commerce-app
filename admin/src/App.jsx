@@ -9,6 +9,7 @@ import { UserUpdate } from './pages/user/UserUpdate';
 import { UserCreate } from './pages/user/UserCreate';
 import { ProductList } from './pages/products/ProductList';
 import { ProductUpdate } from './pages/products/ProductUpdate';
+import { ProductCreate } from './pages/products/ProductCreate';
 
 export const Container = styled.div`
 	display: flex;
@@ -34,11 +35,14 @@ export const App = () => {
 					<Route path='/users/create/user' >
 						<UserCreate />
 					</Route>
-					<Route path='/products' >
+					<Route path='/products' exact >
 						<ProductList />
 					</Route>
 					<Route path='/product/edit/:productId' >
 						<ProductUpdate />
+					</Route>
+					<Route path='/products/create/product' >
+						<ProductCreate />
 					</Route>
 				</Switch>
 			</Container>

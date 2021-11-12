@@ -1,16 +1,12 @@
 import { Avatar } from '@material-ui/core';
 import {
-	CalendarToday,
-	LocationSearching,
-	MailOutline,
-	PermIdentity,
-	PhoneAndroid,
 	Publish,
 } from '@material-ui/icons';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Chart } from '../../components/chart/Chart';
+import { productData } from '../../components/dummyData';
 import { images } from '../../components/images';
 
 export const Container = styled.div`
@@ -35,59 +31,7 @@ export const ProductContainer = styled.div`
 	display: flex;
 	margin-top: 20px;
 `;
-export const ProductShowContainer = styled.div`
-	flex: 1;
-	padding: 20px;
-	-webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-	box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-`;
-export const ProductShowTop = styled.div`
-	display: flex;
-	align-items: center;
-`;
-export const ProductShowTopTitle = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin-left: 20px;
-`;
-export const ProductShowProductName = styled.span`
-	font-weight: 600;
-	${props =>
-		props.info &&
-		css`
-			font-weight: normal;
-			margin-left: 10px;
-		`}
-`;
-export const ProductShowProductTitle = styled.span`
-	font-weight: 300;
-	${props =>
-		props.primary &&
-		css`
-			font-size: 0.8rem;
-			font-weight: 600;
-			color: var(--light-gray);
-		`}
-`;
-export const ProductShowInfo = styled.div`
-	display: flex;
-	align-items: center;
-	margin: 20px 0;
-	color: var(--dark-gray-2);
-	.MuiSvgIcon-root {
-		font-size: 1rem;
-	}
-`;
-export const ProductShowBottom = styled.div`
-	margin-top: 20px;
-`;
-export const ProductUpdateContainer = styled.div`
-	flex: 2;
-	padding: 20px;
-	-webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-	box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-	margin-left: 20px;
-`;
+
 export const ProductUpdateTitle = styled.span`
 	font-size: 1.6rem;
 	font-weight: 600;
@@ -97,26 +41,32 @@ export const ProductUpdateForm = styled.form`
 	justify-content: space-between;
 	margin-top: 20px;
 `;
-export const ProductUpdateLeft = styled.div``;
-export const ProductUpdateRight = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-`;
-export const ProductUpdateItem = styled.div`
+export const ProductUpdateLeft = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-top: 10px;
 	label {
-		margin-bottom: 5px;
+		margin-bottom: 10px;
 		font-size: 0.8rem;
+    color: var(--gray);
 	}
 	input {
 		width: 250px;
 		height: 30px;
+    padding: 5px;
+    margin-bottom: 10px;
 		border-bottom: 1px solid var(--gray);
 	}
+  select{
+    margin-bottom: 10px;
+  }
 `;
+export const ProductUpdateRight = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+`;
+
 export const ProductUpdateUpload = styled.div`
 	display: flex;
 	align-items: center;
@@ -145,114 +95,124 @@ export const ProductUpdateButton = styled.button`
 `;
 
 export const ProductTop = styled.div`
-
+  display: flex;
 `;
 export const ProductTopLeft = styled.div`
-
+	flex: 1;
+  width: 50%;
 `;
 export const ProductTopRight = styled.div`
+	flex: 1;
+	width: 50%;
+	padding: 20px;
+	margin: 20px;
+	-webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+`;
+export const ProductInfoTop = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    font-weight: 600;
+    margin-left: 20px;
+  }
+`;
+export const ProductInfoBottom = styled.div`
+  margin-top: 10px;
+`;
+export const ProductInfoItem = styled.div`
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+`;
+export const ProductInfoItemKey = styled.span`
 
 `;
+export const ProductInfoItemValue = styled.span`
+  font-weight: 300;
+  color: var(--gray);
+`;
 export const ProductBottom = styled.div`
-
+	padding: 20px;
+	margin: 20px;
+	-webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 `;
 
 export const ProductUpdate = () => {
 	return (
 		<Container>
 			<ProductTitleContainer>
-				<ProductTitle>Edit Product</ProductTitle>
+				<ProductTitle>Product</ProductTitle>
 				<Link to='/products/create/product'>
 					<ProductButton>Create</ProductButton>
 				</Link>
-      </ProductTitleContainer>
-      <ProductTop>
-        <ProductTopLeft>
-          <Chart />
-        </ProductTopLeft>
-        <ProductTopRight>
-
-        </ProductTopRight>
-      </ProductTop>
-      <ProductBottom>
-
-      </ProductBottom>
-			{/* <ProductContainer>
-				<ProductShowContainer>
-					<ProductShowTop>
+			</ProductTitleContainer>
+			<ProductTop>
+				<ProductTopLeft>
+					<Chart
+						data={productData}
+						activeData='Sales'
+						title='Sales Performance'
+					/>
+				</ProductTopLeft>
+				<ProductTopRight>
+					<ProductInfoTop>
 						<Avatar>
-							<img src={images.ProPic} alt='' />
+							<img src={images.Img1} alt='' />
 						</Avatar>
-						<ProductShowTopTitle>
-							<ProductShowProductName>Anna Becker</ProductShowProductName>
-							<ProductShowProductTitle>Software Engineer</ProductShowProductTitle>
-						</ProductShowTopTitle>
-					</ProductShowTop>
-					<ProductShowBottom>
-						<ProductShowProductTitle primary>Account Details</ProductShowProductTitle>
-						<ProductShowInfo>
-							<PermIdentity />
-							<ProductShowProductName info>annabeck99</ProductShowProductName>
-						</ProductShowInfo>
-						<ProductShowInfo>
-							<CalendarToday />
-							<ProductShowProductName info>10.12.1999</ProductShowProductName>
-						</ProductShowInfo>
-						<ProductShowProductTitle primary>Contact Details</ProductShowProductTitle>
-						<ProductShowInfo>
-							<PhoneAndroid />
-							<ProductShowProductName info>+1 234 567 890</ProductShowProductName>
-						</ProductShowInfo>
-						<ProductShowInfo>
-							<MailOutline />
-							<ProductShowProductName info>annabeck99@gmail.com</ProductShowProductName>
-						</ProductShowInfo>
-						<ProductShowInfo>
-							<LocationSearching />
-							<ProductShowProductName info>New York | USA</ProductShowProductName>
-						</ProductShowInfo>
-					</ProductShowBottom>
-				</ProductShowContainer>
-				<ProductUpdateContainer>
-					<ProductUpdateTitle>Edit</ProductUpdateTitle>
-					<ProductUpdateForm>
-						<ProductUpdateLeft>
-							<ProductUpdateItem>
-								<label>ProductName</label>
-								<input type='text' placeholder='annabeck99' />
-							</ProductUpdateItem>
-							<ProductUpdateItem>
-								<label>Full Name</label>
-								<input type='text' placeholder='Anna Beck' />
-							</ProductUpdateItem>
-							<ProductUpdateItem>
-								<label>Email</label>
-								<input type='text' placeholder='annabeck99@gmail.com' />
-							</ProductUpdateItem>
-							<ProductUpdateItem>
-								<label>Phone</label>
-								<input type='text' placeholder='+123 456 789' />
-							</ProductUpdateItem>
-							<ProductUpdateItem>
-								<label>Address</label>
-								<input type='text' placeholder='New York | USA' />
-							</ProductUpdateItem>
-						</ProductUpdateLeft>
-						<ProductUpdateRight>
-							<ProductUpdateUpload>
-								<Avatar>
-									<img src={images.ProPic} alt='' />
-								</Avatar>
-								<label htmlFor='file'>
-									<Publish />
-								</label>
-								<input type='file' id='file' />
-							</ProductUpdateUpload>
-							<ProductUpdateButton>Update</ProductUpdateButton>
-						</ProductUpdateRight>
-					</ProductUpdateForm>
-				</ProductUpdateContainer>
-			</ProductContainer> */}
+						<span>Apple Airpods</span>
+					</ProductInfoTop>
+					<ProductInfoBottom>
+						<ProductInfoItem>
+							<ProductInfoItemKey>Id:</ProductInfoItemKey>
+							<ProductInfoItemValue>123</ProductInfoItemValue>
+						</ProductInfoItem>
+						<ProductInfoItem>
+							<ProductInfoItemKey>Sales:</ProductInfoItemKey>
+							<ProductInfoItemValue>6123</ProductInfoItemValue>
+						</ProductInfoItem>
+						<ProductInfoItem>
+							<ProductInfoItemKey>active:</ProductInfoItemKey>
+							<ProductInfoItemValue>yes</ProductInfoItemValue>
+						</ProductInfoItem>
+						<ProductInfoItem>
+							<ProductInfoItemKey>in stock:</ProductInfoItemKey>
+							<ProductInfoItemValue>no</ProductInfoItemValue>
+						</ProductInfoItem>
+					</ProductInfoBottom>
+				</ProductTopRight>
+			</ProductTop>
+			<ProductBottom>
+				<ProductUpdateForm>
+					<ProductUpdateLeft>
+							<label>Product Name</label>
+              <input type='text' placeholder='Apple AirPod' />
+              <label>In Stock</label>
+              <select name="inStock" id="inStock">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+              <label>Active</label>
+              <select name="active" id="active">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+					</ProductUpdateLeft>
+					<ProductUpdateRight>
+						<ProductUpdateUpload>
+							<Avatar>
+								<img src={images.Img1} alt='' />
+							</Avatar>
+							<label htmlFor='file'>
+								<Publish />
+							</label>
+							<input type='file' id='file' />
+						</ProductUpdateUpload>
+						<ProductUpdateButton>Update</ProductUpdateButton>
+					</ProductUpdateRight>
+				</ProductUpdateForm>
+			</ProductBottom>
 		</Container>
 	);
 };

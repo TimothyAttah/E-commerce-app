@@ -1,6 +1,7 @@
 import { Avatar } from '@material-ui/core';
-import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndroid } from '@material-ui/icons';
+import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndroid, Publish } from '@material-ui/icons';
 import React from 'react';
+import {Link} from 'react-router-dom'
 import styled, { css } from 'styled-components';
 import { images } from '../../components/images';
 
@@ -62,7 +63,7 @@ export const UserShowInfo = styled.div`
   display: flex;
   align-items: center;
   margin: 20px 0;
-  color: var(--dark-gray);
+  color: var(--dark-gray-2);
   .MuiSvgIcon-root{
     font-size: 1rem;
   }
@@ -77,16 +78,72 @@ export const UserUpdateContainer = styled.div`
 	box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   margin-left: 20px; 
 `;
-// export const UserContainer = styled.div`
+export const UserUpdateTitle = styled.span`
+	font-size: 1.6rem;
+	font-weight: 600;
+`;
+export const UserUpdateForm = styled.form`
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+`;
+export const UserUpdateLeft = styled.div`
 
-// `;
+`;
+export const UserUpdateRight = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
+export const UserUpdateItem = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+	label {
+		margin-bottom: 5px;
+		font-size: 0.8rem;
+	}
+	input {
+		width: 250px;
+		height: 30px;
+		border-bottom: 1px solid var(--gray);
+	}
+`;
+export const UserUpdateUpload = styled.div`
+	display: flex;
+	align-items: center;
+	.MuiAvatar-root {
+		width: 100px;
+		height: 100px;
+		border-radius: 10px;
+		margin-right: 20px;
+		display: inline-block;
+	}
+	input {
+		display: none;
+	}
+	.MuiSvgIcon-root{
+		display: inline-block;
+		cursor: pointer;
+	}
+`;
+export const UserUpdateButton = styled.button`
+	border-radius: 5px;
+	padding: 5px;
+	height: 30px;
+	background-color: var(--darkBlue);
+	color: var(--text-white);
+	font-weight: 600;
+`;
 
 export const UserUpdate = () => {
   return (
 		<Container>
 			<UserTitleContainer>
 				<UserTitle>Edit User</UserTitle>
+				<Link to='/users/create/user'>
 				<UserButton>Create</UserButton>
+				</Link>
 			</UserTitleContainer>
 			<UserContainer>
 				<UserShowContainer>
@@ -124,7 +181,43 @@ export const UserUpdate = () => {
 						</UserShowInfo>
 					</UserShowBottom>
 				</UserShowContainer>
-				<UserUpdateContainer></UserUpdateContainer>
+				<UserUpdateContainer>
+					<UserUpdateTitle>Edit</UserUpdateTitle>
+					<UserUpdateForm>
+						<UserUpdateLeft>
+							<UserUpdateItem>
+								<label>Username</label>
+								<input type="text" placeholder='annabeck99' />
+							</UserUpdateItem>
+							<UserUpdateItem>
+								<label>Full Name</label>
+								<input type="text" placeholder='Anna Beck' />
+							</UserUpdateItem>
+							<UserUpdateItem>
+								<label>Email</label>
+								<input type="text" placeholder='annabeck99@gmail.com' />
+							</UserUpdateItem>
+							<UserUpdateItem>
+								<label>Phone</label>
+								<input type="text" placeholder='+123 456 789' />
+							</UserUpdateItem>
+							<UserUpdateItem>
+								<label>Address</label>
+								<input type="text" placeholder='New York | USA' />
+							</UserUpdateItem>
+						</UserUpdateLeft>
+						<UserUpdateRight>
+							<UserUpdateUpload>
+								<Avatar>
+									<img src={ images.ProPic } alt='' />
+								</Avatar>
+									<label htmlFor="file"><Publish /></label>
+									<input type="file" id='file' />
+							</UserUpdateUpload>
+							<UserUpdateButton>Update</UserUpdateButton>
+						</UserUpdateRight>
+					</UserUpdateForm>
+				</UserUpdateContainer>
 			</UserContainer>
 		</Container>
 	);

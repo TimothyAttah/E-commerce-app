@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-unresolved
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import cartSlice from './cartSlice';
+// import cartSlice from './cartSlice';
 import userSlice from './userSlice';
 
 import {
@@ -24,7 +24,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers( {
   user: userSlice,
-  cart: cartSlice
 })
 
 const persistedReducer = persistReducer( persistConfig, rootReducer );

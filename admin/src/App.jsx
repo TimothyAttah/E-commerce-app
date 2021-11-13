@@ -10,6 +10,7 @@ import { UserCreate } from './pages/user/UserCreate';
 import { ProductList } from './pages/products/ProductList';
 import { ProductUpdate } from './pages/products/ProductUpdate';
 import { ProductCreate } from './pages/products/ProductCreate';
+import { UserSignIn } from './pages/user/UserSignIn';
 
 export const Container = styled.div`
 	display: flex;
@@ -17,12 +18,22 @@ export const Container = styled.div`
 `;
 
 export const App = () => {
+	const admin = JSON.parse(
+		JSON.parse(localStorage.getItem('persist:root')).currentUser
+	).user.isAdmin;
+
+
 	return (
 		<Router>
-			<Topbar />
-			<Container>
-				<Sidebar />
-				<Switch>
+			<Switch>
+				<Route path='/users/signin'>
+					<UserSignIn />
+				</Route>
+				{ admin && (
+					<>
+				<Topbar />
+				<Container>
+					<Sidebar />
 					<Route path='/' exact>
 						<Home />
 					</Route>
@@ -32,20 +43,22 @@ export const App = () => {
 					<Route path='/user/edit/:userId' exact>
 						<UserUpdate />
 					</Route>
-					<Route path='/users/create/user' >
+					<Route path='/users/create/user'>
 						<UserCreate />
 					</Route>
-					<Route path='/products' exact >
+					<Route path='/products' exact>
 						<ProductList />
 					</Route>
-					<Route path='/product/edit/:productId' >
+					<Route path='/product/edit/:productId'>
 						<ProductUpdate />
 					</Route>
-					<Route path='/products/create/product' >
+					<Route path='/products/create/product'>
 						<ProductCreate />
 					</Route>
-				</Switch>
-			</Container>
+				</Container>
+				</>
+				)}
+			</Switch>
 		</Router>
-	)
+	);
 }

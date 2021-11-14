@@ -1,7 +1,7 @@
-import { Avatar } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { images } from '../../images';
+import { format } from 'timeago.js';
+import { userRequest } from '../../../requestMethods';
 
 export const Container = styled.div`
 	flex: 2;
@@ -42,20 +42,22 @@ export const WidgetTableDataStatus = styled.td`
 
 `;
 export const WidgetButton = styled.button`
+	padding: 5px;
+	border-radius: 5px;
 	${props =>
-		props.Approved &&
+		props.status === 'approved' &&
 		css`
 			background-color: #e5faf2;
 			color: #3bb077;
 		`}
 	${props =>
-		props.Declined &&
+		props.status === 'declined' &&
 		css`
 			background-color: #fff0f1;
 			color: #d95087;
 		`}
   ${props =>
-		props.Pending &&
+		props.status === 'pending' &&
 		css`
 			background-color: #ebf1fe;
 			color: #2a7ade;
@@ -63,72 +65,41 @@ export const WidgetButton = styled.button`
 `;
 
 export const WidgetLarge = () => {
-  // const Button = ( { type } ) => {
-  //   return <WidgetButton props={type}>{ type }</WidgetButton>
-  // }
+  const [orders, setOrders] = useState([]);
+
+	useEffect(() => {
+		const getOrders = async () => {
+			try {
+				const res = await userRequest.get('orders/?new=true');
+				setOrders(res.data);
+			} catch (err) {
+				console.log(err.message);
+			}
+		};
+		getOrders();
+	}, []);
   return (
 		<Container>
 			<WidgetTitle>Latest transactions</WidgetTitle>
 			<WidgetTable>
 				<WidgetTableRow>
-					<WidgetTableHeader>Customer</WidgetTableHeader>
+					<WidgetTableHeader>Customer Id</WidgetTableHeader>
 					<WidgetTableHeader>Date</WidgetTableHeader>
 					<WidgetTableHeader>Amount</WidgetTableHeader>
 					<WidgetTableHeader>Status</WidgetTableHeader>
 				</WidgetTableRow>
-				<WidgetTableRow>
-					<WidgetTableDataUser>
-						<Avatar>
-							<img src={images.ProPic} alt='' />
-						</Avatar>
-						<span>Susan Carol</span>
-					</WidgetTableDataUser>
-					<WidgetTableDataDate>2 Jun 2021</WidgetTableDataDate>
-					<WidgetTableDataAmount>$122.00</WidgetTableDataAmount>
-					<WidgetTableDataStatus>
-						<WidgetButton Approved>Approved</WidgetButton>
-					</WidgetTableDataStatus>
-				</WidgetTableRow>
-				<WidgetTableRow>
-					<WidgetTableDataUser>
-						<Avatar>
-							<img src={images.ProPic} alt='' />
-						</Avatar>
-						<span>Susan Carol</span>
-					</WidgetTableDataUser>
-					<WidgetTableDataDate>2 Jun 2021</WidgetTableDataDate>
-					<WidgetTableDataAmount>$122.00</WidgetTableDataAmount>
-					<WidgetTableDataStatus>
-						{/* <Button type="Declined" /> */}
-						<WidgetButton Declined>Declined</WidgetButton>
-					</WidgetTableDataStatus>
-				</WidgetTableRow>
-				<WidgetTableRow>
-					<WidgetTableDataUser>
-						<Avatar>
-							<img src={images.ProPic} alt='' />
-						</Avatar>
-						<span>Susan Carol</span>
-					</WidgetTableDataUser>
-					<WidgetTableDataDate>2 Jun 2021</WidgetTableDataDate>
-					<WidgetTableDataAmount>$122.00</WidgetTableDataAmount>
-					<WidgetTableDataStatus>
-						<WidgetButton Pending>Pending</WidgetButton>
-					</WidgetTableDataStatus>
-				</WidgetTableRow>
-				<WidgetTableRow>
-					<WidgetTableDataUser>
-						<Avatar>
-							<img src={images.ProPic} alt='' />
-						</Avatar>
-						<span>Susan Carol</span>
-					</WidgetTableDataUser>
-					<WidgetTableDataDate>2 Jun 2021</WidgetTableDataDate>
-					<WidgetTableDataAmount>$122.00</WidgetTableDataAmount>
-					<WidgetTableDataStatus>
-						<WidgetButton Approved>Approved</WidgetButton>
-					</WidgetTableDataStatus>
-				</WidgetTableRow>
+				{orders.map(order => (
+					<WidgetTableRow key={order._id}>
+						<WidgetTableDataUser>
+							<span>{order?.userId}</span>
+						</WidgetTableDataUser>
+						<WidgetTableDataDate>{format(order?.createdAt)}</WidgetTableDataDate>
+						<WidgetTableDataAmount>${order?.amount}</WidgetTableDataAmount>
+						<WidgetTableDataStatus>
+							<WidgetButton status={order?.status}>{order?.status}</WidgetButton>
+						</WidgetTableDataStatus>
+					</WidgetTableRow>
+				))}
 			</WidgetTable>
 		</Container>
 	);

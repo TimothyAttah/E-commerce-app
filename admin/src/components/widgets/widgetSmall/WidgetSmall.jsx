@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Avatar } from '@material-ui/core';
-import { images } from '../../images';
-import { Visibility } from '@material-ui/icons';
+import { PermIdentity, Visibility } from '@material-ui/icons';
 import { userRequest } from '../../../requestMethods';
 
 export const Container = styled.div`
@@ -23,7 +22,11 @@ export const WidgetListItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin: 20px 0;
+  .MuiAvatar-root{
+    margin-right: 10px;
+  }
 `;
 export const WidgetUser = styled.div`
   display: flex;
@@ -61,46 +64,26 @@ export const WidgetSmall = () => {
      }
     }
     getUsers();
-    console.log(users);
   },[])
   return (
-    <Container>
-      <WidgetTitle>New Join Members</WidgetTitle>
-      <WidgetList>
-        <WidgetListItem>
-          <Avatar><img src={images.ProPic} alt='' /></Avatar>
-          <WidgetUser>
-          <WidgetUsername>Anna Keller</WidgetUsername>
-          <WidgetUserTitle>Software Engineer</WidgetUserTitle>
-          </WidgetUser>
-          <WidgetButton>
-            <Visibility />
-            Display
-          </WidgetButton>
-        </WidgetListItem>
-        <WidgetListItem>
-          <Avatar><img src={images.ProPic} alt='' /></Avatar>
-          <WidgetUser>
-          <WidgetUsername>Anna Keller</WidgetUsername>
-          <WidgetUserTitle>Software Engineer</WidgetUserTitle>
-          </WidgetUser>
-          <WidgetButton>
-            <Visibility />
-            Display
-          </WidgetButton>
-        </WidgetListItem>
-        <WidgetListItem>
-          <Avatar><img src={images.ProPic} alt='' /></Avatar>
-          <WidgetUser>
-          <WidgetUsername>Anna Keller</WidgetUsername>
-          <WidgetUserTitle>Software Engineer</WidgetUserTitle>
-          </WidgetUser>
-          <WidgetButton>
-            <Visibility />
-            Display
-          </WidgetButton>
-        </WidgetListItem>
-      </WidgetList>
-    </Container>
-  )
+		<Container>
+			<WidgetTitle>New Join Members</WidgetTitle>
+			<WidgetList>
+				{users.map(user => (
+					<WidgetListItem key={user._id}>
+            <Avatar>
+              {user?.img ? (<img src={user?.img} alt='' />) : (<PermIdentity/>)}
+						</Avatar>
+						<WidgetUser>
+							<WidgetUsername>{user?.username}</WidgetUsername>
+						</WidgetUser>
+						<WidgetButton>
+							<Visibility />
+							Display
+						</WidgetButton>
+					</WidgetListItem>
+				))}
+			</WidgetList>
+		</Container>
+	);
 }

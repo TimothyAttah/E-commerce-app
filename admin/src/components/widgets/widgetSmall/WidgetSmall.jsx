@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Avatar } from '@material-ui/core';
 import { images } from '../../images';
 import { Visibility } from '@material-ui/icons';
+import { userRequest } from '../../../requestMethods';
 
 export const Container = styled.div`
 	flex: 1;
@@ -46,11 +47,22 @@ export const WidgetButton = styled.button`
     font-size: 1rem;
 	}
 `;
-// export const Container = styled.div`
-
-// `;
 
 export const WidgetSmall = () => {
+  const [ users, setUsers ] = useState( [] );
+
+  useEffect( () => {
+    const getUsers = async () => {
+     try {
+       const res = await userRequest.get( 'users/?new=true' );
+       setUsers(res.data);
+     } catch (err) {
+       console.log(err.message);
+     }
+    }
+    getUsers();
+    console.log(users);
+  },[])
   return (
     <Container>
       <WidgetTitle>New Join Members</WidgetTitle>

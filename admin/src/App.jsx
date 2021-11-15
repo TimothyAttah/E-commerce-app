@@ -18,10 +18,12 @@ export const Container = styled.div`
 `;
 
 export const App = () => {
-	const admin = JSON.parse(
-		JSON.parse(localStorage.getItem('persist:root')).currentUser
-	).user.isAdmin;
 
+const userToken = JSON.parse(localStorage.getItem('persist:root'));
+
+const user = JSON.parse(userToken.user);
+	
+	const admin = user.currentUser.user.isAdmin
 
 	return (
 		<Router>

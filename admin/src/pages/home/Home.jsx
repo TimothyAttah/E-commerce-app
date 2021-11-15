@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Chart } from '../../components/chart/Chart';
 import { FeaturedInfo } from '../../components/featuredInfo/FeaturedInfo';
-import { userData } from '../../components/dummyData';
 import { WidgetLarge } from '../../components/widgets/widgetLarge/WidgetLarge';
 import { WidgetSmall } from '../../components/widgets/widgetSmall/WidgetSmall';
 import { userRequest } from '../../requestMethods';

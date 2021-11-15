@@ -1,6 +1,5 @@
 import { loginStart, loginFailure, loginSuccess } from "./userSlice";
 import { publicRequest } from "../requestMethods";
-import { useHistory } from "react-router-dom";
 
 
 export const login = async ( dispatch, user ) => {

@@ -26,5 +26,6 @@ export const {
   loginStart,
   loginSuccess,
   loginFailure
- } = userSlice.actions;
+} = userSlice.actions;
+ 
 export default userSlice.reducer;

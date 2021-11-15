@@ -3,6 +3,7 @@ import {
 	Publish,
 } from '@material-ui/icons';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Chart } from '../../components/chart/Chart';
@@ -141,7 +142,13 @@ export const ProductBottom = styled.div`
 
 export const ProductUpdate = () => {
 	const location = useLocation();
-	console.log(location);
+	const productId = location.pathname.split('/')[3]
+	// const productId = location.pathname.split('/')[2]
+
+	const product = useSelector(state => state.product.products.find(item => item._id === productId));
+	// const product = useSelector(state => state.product.products.find(product => product._id === productId));
+	console.log('this is single', product);
+	console.log('this is product id', productId);
 	return (
 		<Container>
 			<ProductTitleContainer>
@@ -161,26 +168,22 @@ export const ProductUpdate = () => {
 				<ProductTopRight>
 					<ProductInfoTop>
 						<Avatar>
-							<img src={images.Img1} alt='' />
+							<img src={product?.img} alt='' />
 						</Avatar>
-						<span>Apple Airpods</span>
+						<span>{product?.title}</span>
 					</ProductInfoTop>
 					<ProductInfoBottom>
 						<ProductInfoItem>
 							<ProductInfoItemKey>Id:</ProductInfoItemKey>
-							<ProductInfoItemValue>123</ProductInfoItemValue>
+							<ProductInfoItemValue>{product?._id}</ProductInfoItemValue>
 						</ProductInfoItem>
 						<ProductInfoItem>
 							<ProductInfoItemKey>Sales:</ProductInfoItemKey>
 							<ProductInfoItemValue>6123</ProductInfoItemValue>
 						</ProductInfoItem>
 						<ProductInfoItem>
-							<ProductInfoItemKey>active:</ProductInfoItemKey>
-							<ProductInfoItemValue>yes</ProductInfoItemValue>
-						</ProductInfoItem>
-						<ProductInfoItem>
 							<ProductInfoItemKey>in stock:</ProductInfoItemKey>
-							<ProductInfoItemValue>no</ProductInfoItemValue>
+							<ProductInfoItemValue>{ product?.inStock }</ProductInfoItemValue>
 						</ProductInfoItem>
 					</ProductInfoBottom>
 				</ProductTopRight>
@@ -189,22 +192,21 @@ export const ProductUpdate = () => {
 				<ProductUpdateForm>
 					<ProductUpdateLeft>
 							<label>Product Name</label>
-              <input type='text' placeholder='Apple AirPod' />
+              <input type='text' placeholder={product?.title} />
+							<label>Product Description</label>
+              <input type='text' placeholder={product?.desc} />
+							<label>Product Price</label>
+              <input type='text' placeholder={product?.price} />
               <label>In Stock</label>
               <select name="inStock" id="inStock">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
-              <label>Active</label>
-              <select name="active" id="active">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
               </select>
 					</ProductUpdateLeft>
 					<ProductUpdateRight>
 						<ProductUpdateUpload>
 							<Avatar>
-								<img src={images.Img1} alt='' />
+								<img src={product.img} alt='' />
 							</Avatar>
 							<label htmlFor='file'>
 								<Publish />

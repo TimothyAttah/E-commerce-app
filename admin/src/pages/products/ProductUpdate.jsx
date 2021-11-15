@@ -2,13 +2,12 @@ import { Avatar } from '@material-ui/core';
 import {
 	Publish,
 } from '@material-ui/icons';
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Chart } from '../../components/chart/Chart';
-import { productData } from '../../components/dummyData';
-import { images } from '../../components/images';
+import { userRequest } from '../../requestMethods';
 
 export const Container = styled.div`
 	flex: 4;
@@ -143,12 +142,55 @@ export const ProductBottom = styled.div`
 export const ProductUpdate = () => {
 	const location = useLocation();
 	const productId = location.pathname.split('/')[3]
-	// const productId = location.pathname.split('/')[2]
+
+	const [productStats, setProductStats] = useState([])
 
 	const product = useSelector(state => state.product.products.find(item => item._id === productId));
 	// const product = useSelector(state => state.product.products.find(product => product._id === productId));
 	console.log('this is single', product);
-	console.log('this is product id', productId);
+	console.log( 'this is product id', productId );
+	
+	const MONTHS = useMemo(
+		() => [
+			'Jan',
+			'Feb',
+			'Mar',
+			'Apr',
+			'May',
+			'Jun',
+			'Jul',
+			'Aug',
+			'Sep',
+			'Oct',
+			'Nov',
+			'Dec',
+		],
+		[]
+	);
+
+	useEffect( () => {
+		const getStats = async () => {
+			try {
+				const res = await userRequest.get( 'orders/income?pid=' + productId  );
+				// const res = await userRequest.get( `orders/income?pid=${ productId }` );
+				console.log( 'this is products stats data', res.data );
+				const list = res.data.sort( ( a, b ) => {
+					return a._id - b._id
+				})
+				list.map( item => (
+					setProductStats( prev => [
+						...prev,
+						{name: MONTHS[item._id - 1], Sales: item.total}
+					])
+				))
+			} catch (err) {
+				console.log(err.message);
+			}
+		}
+		getStats()
+	}, [ MONTHS, productId ] )
+	
+	console.log('this is products stats', productStats);
 	return (
 		<Container>
 			<ProductTitleContainer>
@@ -160,7 +202,7 @@ export const ProductUpdate = () => {
 			<ProductTop>
 				<ProductTopLeft>
 					<Chart
-						data={productData}
+						data={productStats}
 						activeData='Sales'
 						title='Sales Performance'
 					/>

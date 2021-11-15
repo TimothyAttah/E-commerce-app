@@ -1,12 +1,12 @@
 import { DataGrid } from '@material-ui/data-grid';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { DeleteOutline, EditOutlined } from '@material-ui/icons';
-import { productRows } from '../../components/dummyData';
+// import { productRows } from '../../components/dummyData';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../redux/apiCall';
+import { deleteProduct, getProducts } from '../../redux/apiCall';
 
 
 export const Container = styled.div`
@@ -38,7 +38,7 @@ export const ProductsListButton = styled.button`
 
 export const ProductList = () => {
 	const dispatch = useDispatch();
-   const [data, setData] = useState(productRows);
+  //  const [data, setData] = useState(productRows);
 	const products = useSelector( state => state.product.products )
 	
 	console.log('This is products', products);
@@ -48,7 +48,8 @@ export const ProductList = () => {
 	}, [ dispatch ] );
 
 		const handleDelete = id => {
-			setData(data.filter(item => item.id !== id));
+			deleteProduct( id, dispatch )
+			console.log(id);
     };
   
    const columns = [
@@ -76,12 +77,12 @@ export const ProductList = () => {
 				renderCell: params => {
 					return (
 						<>
-							<Link to={`/product/edit/${params.row.id}`}>
+							<Link to={`/product/edit/${params.row._id}`}>
 								<ProductsListButton edit>
 									<EditOutlined />
 								</ProductsListButton>
 							</Link>
-							<ProductsListButton onClick={() => handleDelete(params.row.id)}>
+							<ProductsListButton onClick={() => handleDelete(params.row._id)}>
 								<DeleteOutline />
 							</ProductsListButton>
 						</>

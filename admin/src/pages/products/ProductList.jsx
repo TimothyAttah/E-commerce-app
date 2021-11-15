@@ -1,10 +1,12 @@
 import { DataGrid } from '@material-ui/data-grid';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { DeleteOutline, EditOutlined } from '@material-ui/icons';
 import { productRows } from '../../components/dummyData';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../redux/apiCall';
 
 
 export const Container = styled.div`
@@ -33,19 +35,24 @@ export const ProductsListButton = styled.button`
       display: flex;
 		`}
 `;
-// export const Container = styled.div`
-
-// `;
 
 export const ProductList = () => {
+	const dispatch = useDispatch();
    const [data, setData] = useState(productRows);
+	const products = useSelector( state => state.product.products )
+	
+	console.log('This is products', products);
+	
+	useEffect( () => {
+		getProducts( dispatch )
+	}, [ dispatch ] );
 
 		const handleDelete = id => {
 			setData(data.filter(item => item.id !== id));
     };
   
    const columns = [
-			{ field: 'id', headerName: 'ID', width: 100 },
+			{ field: '_id', headerName: 'ID', width: 240 },
 			{
 				field: 'product',
 				headerName: 'Product',
@@ -53,15 +60,15 @@ export const ProductList = () => {
 				renderCell: params => {
 					return (
 						<ProductLists>
-							<Avatar>{params.row.img}</Avatar>
-							{params.row.name}
+							{params.row.img ? (<Avatar>{params.row.img}</Avatar>) : <Avatar></Avatar>}
+							
+							{params.row.title}
 						</ProductLists>
 					);
 				},
 			},
-			{ field: 'stock', headerName: 'Stock', width: 200 },
-			{ field: 'status', headerName: 'Status', width: 120 },
-			{ field: 'price', headerName: 'Price Volume', width: 220 },
+			{ field: 'inStock', headerName: 'Stock', width: 200 },
+			{ field: 'price', headerName: 'Price', width: 220 },
 			{
 				field: 'action',
 				headerName: 'Action',
@@ -86,9 +93,10 @@ export const ProductList = () => {
   return (
 		<Container>
 			<DataGrid
-				rows={data}
+				rows={products}
 				disableSelectionOnClick
-				columns={columns}
+				columns={ columns }
+				getRowId={row=> row._id}
 				pageSize={5}
 				checkboxSelection
 			/>

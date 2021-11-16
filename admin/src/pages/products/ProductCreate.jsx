@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL} from 'firebase/storage';
 import { app } from '../../firebase';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../redux/apiCall';
 
 export const Container = styled.div`
 	flex: 4;
@@ -66,6 +68,7 @@ export const NewProductButton = styled.button`
 `;
 
 export const ProductCreate = () => {
+	const dispatch = useDispatch();
 	const [ inputs, setInputs ] = useState( {
 	})
 	const [file, setFile] = useState(null)
@@ -115,18 +118,11 @@ export const ProductCreate = () => {
 			() => {
 				getDownloadURL( uploadTask.snapshot.ref ).then( downloadURL => {
 					console.log( 'File available at ', downloadURL );
-					console.log({...inputs, });
+					const product = { ...inputs, img: downloadURL, categories: category };
+					addProduct(product, dispatch)
 				})
 			}
-		)
-
-		const newProduct = {
-			file,
-			inputs,
-			category
-		}
-
-		console.log('this is new product', newProduct);
+		) 
 	}
 	
 	 

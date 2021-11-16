@@ -34,7 +34,7 @@ export const getProducts = async ( dispatch ) => {
 export const addProduct = async (product, dispatch ) => {
   dispatch( addProductStart() );
   try {
-    const res = await userRequest.post( `/products/create`, {product} )
+    const res = await userRequest.post( `/products/create`, product )
     dispatch( addProductSuccess( res.data ) )
     console.log( 'productsAdd>>>>', res.data );
   } catch (err) {

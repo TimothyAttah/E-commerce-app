@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -64,30 +64,92 @@ export const NewProductButton = styled.button`
 `;
 
 export const ProductCreate = () => {
+	const [ inputs, setInputs ] = useState( {
+	})
+	const [file, setFile] = useState(null)
+	const [ category, setCategory ] = useState( [] )
+
+	const handleChange = (e) => {
+		// setInputs({...inputs,[e.target.name]:e.target.value})
+		setInputs( prev => {
+			return{...prev, [e.target.name]:e.target.value}
+		})
+	}
+
+
+
+
+	const handleCategories = (e) => {
+		setCategory(e.target.value.split(","))
+	}
+	
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const newProduct = {
+			file,
+			inputs,
+			category
+		}
+
+		console.log('this is new product', newProduct);
+	}
+	
+	 
 	return (
 		<Container>
 			<NewProductTitle>New Product</NewProductTitle>
-			<NewProductForm>
+			<NewProductForm onSubmit={handleSubmit}>
 				<NewProductFormItem>
 					<label>Image</label>
-					<input type='file' id='file' />
+					<input
+						type='file'
+						id='file'
+						onChange={e => setFile(e.target.files)[0]}
+					/>
 				</NewProductFormItem>
 				<NewProductFormItem>
-					<label> Name</label>
-					<input type='text' placeholder='Apple AirPods' />
+					<label> Title</label>
+					<input
+						type='text'
+						placeholder='Apple AirPods'
+						name='title'
+						onChange={handleChange}
+					/>
+				</NewProductFormItem>
+				<NewProductFormItem>
+					<label> Description</label>
+					<input
+						type='text'
+						placeholder='description....'
+						name='desc'
+						onChange={handleChange}
+					/>
+				</NewProductFormItem>
+				<NewProductFormItem>
+					<label> Price</label>
+					<input
+						type='number'
+						placeholder='2000'
+						name='price'
+						onChange={handleChange}
+					/>
+				</NewProductFormItem>
+				<NewProductFormItem>
+					<label> Categories</label>
+					<input
+						type='text'
+						placeholder='jeans, skirts'
+						onChange={handleCategories}
+					/>
 				</NewProductFormItem>
 				<NewProductFormItem>
 					<label>Stock</label>
-					<input type='text' placeholder='123' />
-				</NewProductFormItem>
-				<NewProductFormItem>
-					<label>Active</label>
-					<select name='active' id='active'>
-						<option value='yes'>Yes</option>
-						<option value='no'>No</option>
+					<select name='inStock' onChange={handleChange}>
+						<option value='true'>Yes</option>
+						<option value='false'>No</option>
 					</select>
 				</NewProductFormItem>
-				<NewProductButton>Create</NewProductButton>
+				<NewProductButton type='submit'>Create</NewProductButton>
 			</NewProductForm>
 		</Container>
 	);

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL} from 'firebase';
+import { app } from '../../firebase';
 
 export const Container = styled.div`
 	flex: 4;
@@ -85,6 +87,9 @@ export const ProductCreate = () => {
 	
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		const fileName = new Date().getTime() + file.name;
+
+		const storage = getStorage(app)
 		const newProduct = {
 			file,
 			inputs,
@@ -104,7 +109,7 @@ export const ProductCreate = () => {
 					<input
 						type='file'
 						id='file'
-						onChange={e => setFile(e.target.files)[0]}
+						onChange={e => setFile(e.target.files[0])}
 					/>
 				</NewProductFormItem>
 				<NewProductFormItem>

@@ -32,14 +32,10 @@ export const UserListButton = styled.button`
       align-items: center;
 		`}
 `;
-// export const UserListUser = styled.div`
-
-// `;
-
 
 export const UserList = () => {
   const [ data, setData ] = useState( userRows );
-  
+
   const handleDelete = id => {
 		setData(data.filter(item => item.id !== id))
 	};
@@ -75,8 +71,7 @@ export const UserList = () => {
     } },
   ]
 
-  
-  
+
   return (
     <Container>
       <DataGrid
